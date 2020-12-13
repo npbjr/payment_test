@@ -11,17 +11,18 @@ class PaymentView(MethodView):
     def post(self):
         from application.app import config
         if not validateCardNumber(request.args['creditCardNumber']):
-            return make_response(jsonify(message='invalid card number',status=400, category='error'), 400)
+            return make_response(jsonify(message='invalid card number',status=400), 400)
         try:
             amount = int(request.args['amount'])
         except Exception as e:
             raise e
+        print(amount in list(range(21, 500)))
         if amount <= 20:
             print('cheap payment')
             return cheapPay.process(request)
-        elif amount in range(21, 500):
+        elif amount in list(range(21, 500+1)):
             print('expensive payment')
-            if config.paymentModes['espensive']:
+            if config.paymentModes['expensive']:
                 return expensivePay.process(request)
             else:
                 # try once only once

@@ -1,4 +1,4 @@
-
+from flask import request, make_response, jsonify
 class CheapPayment():
     def __init__(self, *args, **kwargs):
         pass
@@ -15,4 +15,4 @@ class CheapPayment():
             'securityCode': securityCode,
             'amount': amount
         }
-        return data
+        return make_response(jsonify(message='Payment Processed',status=200, category='Cheap Payment'), 200)

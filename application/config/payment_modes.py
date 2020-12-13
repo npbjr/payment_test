@@ -3,7 +3,7 @@ class Config():
     def __init__(self, app):
         self.app = app
         app.config['paymentmodes'] = {
-            'espensive':True,
+            'expensive':True,
             'cheap':True,
             'premium':True,
         }
